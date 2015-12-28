@@ -1,29 +1,67 @@
-import {FormBuilder, Validators} from "angular2/common";
+import {FormBuilder, Validators,Control} from "angular2/common";
 import * as c from '../constants';
 
 export class Angular2FormBuilder {
+	
+	private Model: any;
+	private rawValidators: Function[];
+	private key: string;
 	
 	constructor(private formBuilder: FormBuilder = new FormBuilder()) {}
 	
 	getForm(Model: any) {
 		
+		this.Model = Model;
 		var modelInstance = new Model();
 		var keys = Object.keys(modelInstance);
 		var controlsConfig: {[key: string]: any} = {};
 		
-		keys.forEach(value => {
+		keys.forEach(key => {
 			
-			var required = Reflect.getMetadata(c.prefix + c.required, Model, value)
+			this.key = key;
+			this.rawValidators = [];
 			
-			var rawValidators: Function[] = [];
+			this.required();
+			this.pattern();
+			this.maxLength();
+			this.minLength();
 			
-			if (required) rawValidators.push(Validators.required);
+			var validators = Validators.compose(this.rawValidators);
 			
-			var validators = Validators.compose(rawValidators);
-			
-			controlsConfig[value] = [Model[value], validators];
+			controlsConfig[key] = [Model[key], validators];
 		})
 		
 		return this.formBuilder.group(controlsConfig);
+		
+		
 	}
+	
+	private required() {
+		var required = Reflect.getMetadata(c.prefix + c.required, this.Model, this.key);
+		if (required) this.rawValidators.push(Validators.required);
+	}
+	
+	private pattern() {
+		var pattern: RegExp = Reflect.getMetadata(c.prefix + c.pattern, this.Model, this.key);
+		if (pattern) this.rawValidators.push(
+			
+			(control: Control) => {
+				
+				if (!pattern.test(control.value)) {
+					control.valid = false;
+				}
+			
+			}); 
+	}
+	
+	private maxLength() {
+		var maxLength: number = Reflect.getMetadata(c.prefix + c.maxLength, this.Model, this.key);
+		if (maxLength) this.rawValidators.push(Validators.maxLength(maxLength)); 
+	}
+		
+	private minLength() {
+		var minLength: number = Reflect.getMetadata(c.prefix + c.minLength, this.Model, this.key);
+		if (minLength) this.rawValidators.push(Validators.maxLength(minLength)); 
+	}
+	
 }
