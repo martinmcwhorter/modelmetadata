@@ -31,5 +31,7 @@ var form = angular2FormBuilderAdapter.getForm(Person);
 //	});
 ```
 
+## Status
+
 As of now this project is still in the early proof of concept stages.
 That said - I will take pull request.
