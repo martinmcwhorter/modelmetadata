@@ -9,10 +9,10 @@ object or a `mongoose` schema. The posibilities are endless.
 ```ts
 class Person {
 	
-	@Required
+	@Required()
 	firstName: string;
 	
-	@Required
+	@Required()
 	lastName: string;
 }
 ```

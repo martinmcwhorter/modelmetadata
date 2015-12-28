@@ -1,17 +1,19 @@
-import {FormBuilder, Validators} from "angular2/common"
+import {FormBuilder, Validators} from "angular2/common";
+import * as c from '../constants';
 
 export class Angular2FormBuilder {
 	
 	constructor(private formBuilder: FormBuilder = new FormBuilder()) {}
 	
-	getForm(model: any) {
+	getForm(Model: any) {
 		
-		var keys = Object.getOwnPropertyNames(model);
+		var modelInstance = new Model();
+		var keys = Object.keys(modelInstance);
 		var controlsConfig: {[key: string]: any} = {};
 		
 		keys.forEach(value => {
 			
-			var required = Reflect.getMetadata('modelProperty:required', model, value)
+			var required = Reflect.getMetadata(c.prefix + c.required, Model, value)
 			
 			var rawValidators: Function[] = [];
 			
@@ -19,7 +21,7 @@ export class Angular2FormBuilder {
 			
 			var validators = Validators.compose(rawValidators);
 			
-			controlsConfig[value] = [model[value], validators];
+			controlsConfig[value] = [Model[value], validators];
 		})
 		
 		return this.formBuilder.group(controlsConfig);
