@@ -6,5 +6,6 @@ export let maxLength = "maxLength";
 export let minLength = "minLength";
 export let max = "max";
 export let min = "min";
+export let label = "label";
 
 export let message = ":message";
