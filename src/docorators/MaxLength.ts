@@ -1,7 +1,7 @@
 import 'reflect-metadata/Reflect';
 import * as c from '../constants';
 
-export default function MaxLength(length: number, message?: string) {
+function maxLength(length: number, message?: string) {
 	
 	return  (target: Object, propertyKey: string | symbol): PropertyDecorator => {
 	
@@ -16,3 +16,6 @@ export default function MaxLength(length: number, message?: string) {
 		return;
 	}
 }
+
+let MaxLenth = maxLength;
+export default MaxLenth;

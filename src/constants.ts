@@ -1,8 +1,10 @@
-export var prefix = "modelProperty:";
+export let prefix = "modelProperty:";
 
-export var required = "required";
-export var pattern = "pattern";
-export var maxLength = "maxLength";
-export var minLength = "minLength";
+export let required = "required";
+export let pattern = "pattern";
+export let maxLength = "maxLength";
+export let minLength = "minLength";
+export let max = "max";
+export let min = "min";
 
-export var message = ":message";
+export let message = ":message";

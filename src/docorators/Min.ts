@@ -1,13 +1,13 @@
 import 'reflect-metadata/Reflect';
 import * as c from '../constants';
 
-function pattern(pattern: RegExp, message?: string) {
+function min(length: number, message?: string) {
 	
 	return  (target: Object, propertyKey: string | symbol): PropertyDecorator => {
 	
-		let name = c.prefix + c.pattern;
+		let name = c.prefix + c.min;
 	
-		Reflect.defineMetadata(name, pattern, target, propertyKey);
+		Reflect.defineMetadata(name, length, target, propertyKey);
 
 		if (message) {
 			Reflect.defineMetadata(name + c.message, message, target, propertyKey);
@@ -17,5 +17,5 @@ function pattern(pattern: RegExp, message?: string) {
 	}
 }
 
-let Pattern = pattern;
-export default Pattern;
+let Min = min;
+export default Min;

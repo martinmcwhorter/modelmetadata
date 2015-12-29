@@ -25,6 +25,7 @@
     "zone.js": "^0.5.10"
   },
   "devDependencies": {
+    "jasmine-core": "2.4.1",
     "typescript": "^1.7.5"
   }
 }

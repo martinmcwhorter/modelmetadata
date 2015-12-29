@@ -1,7 +1,7 @@
 import 'reflect-metadata/Reflect';
 import * as c from '../constants';
 
-export default function Required(message?: string) {
+function required(message?: string) {
 	
 	return  (target: Object, propertyKey: string | symbol): PropertyDecorator => {
 	
@@ -16,3 +16,6 @@ export default function Required(message?: string) {
 		return;
 	}
 }
+
+let Required = required;
+export default Required;
