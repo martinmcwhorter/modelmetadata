@@ -1,7 +1,6 @@
-import 'reflect-metadata/Reflect';
 import * as c from '../constants';
 
-function required(message?: string) {
+function required(message?: string): any {
 	
 	return  (target: Object, propertyKey: string | symbol): PropertyDecorator => {
 	

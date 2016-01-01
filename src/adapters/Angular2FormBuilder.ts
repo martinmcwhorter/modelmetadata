@@ -1,5 +1,5 @@
 import {FormBuilder, Validators,Control} from "angular2/common";
-import * as c from 'constants';
+import * as c from '../constants';
 
 export class Angular2FormBuilder {
 	

@@ -1,7 +1,6 @@
-import 'reflect-metadata/Reflect';
 import * as c from '../constants';
 
-function pattern(pattern: RegExp, message?: string) {
+function pattern(pattern: RegExp, message?: string): any {
 	
 	return  (target: Object, propertyKey: string | symbol): PropertyDecorator => {
 	

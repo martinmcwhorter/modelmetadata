@@ -1,9 +1,8 @@
-import 'reflect-metadata/Reflect';
 import * as c from '../constants';
 
-function label(label: string) {
+function label(label: string): any {
 	
-	return  (target: Object, propertyKey: string | symbol): PropertyDecorator => {
+	let labelDecorator = (target: Object, propertyKey: string | symbol): PropertyDecorator => {
 	
 		let name = c.prefix + c.label;
 	
@@ -11,6 +10,8 @@ function label(label: string) {
 
 		return;
 	}
+	
+	return labelDecorator;
 }
 
 let Label = label;

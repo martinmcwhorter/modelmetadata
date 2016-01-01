@@ -1,7 +1,6 @@
-import 'reflect-metadata/Reflect';
 import * as c from '../constants';
 
-function max(length: number, message?: string) {
+function max(length: number, message?: string): any {
 	
 	return  (target: Object, propertyKey: string | symbol): PropertyDecorator => {
 	
