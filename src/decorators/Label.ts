@@ -14,5 +14,4 @@ function label(label: string): any {
 	return labelDecorator;
 }
 
-let Label = label;
-export default Label;
+export let Label = label;

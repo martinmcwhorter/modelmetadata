@@ -16,5 +16,4 @@ function minLength(length: number, message?: string): any {
 	}
 }
 
-let MinLength = minLength;
-export default MinLength 
+export let MinLength = minLength;

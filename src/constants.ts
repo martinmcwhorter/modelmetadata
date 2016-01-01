@@ -8,4 +8,6 @@ export let max = "max";
 export let min = "min";
 export let label = "label";
 
+export let propertyKeys = prefix + "propertyKeys";
+
 export let message = ":message";

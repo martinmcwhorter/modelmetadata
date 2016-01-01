@@ -1,36 +1,36 @@
-import MaxLength from './MaxLength';
+import {Required} from './Required';
 import * as c from '../constants';
 
-describe("@MaxLenth()", () => {
+describe("@Required()", () => {
 
-	let metadataKey = c.prefix + c.maxLength;
+	let metadataKey = c.prefix + c.required;
 
 	it('should populate the property metadata', () => {
 		
 		class People {
 		
-			@MaxLength(25)
+			@Required()
 			name: string;	
 		}
 		let  people = new People()
 		
 		let name = Reflect.getMetadata(metadataKey, people, "name");
-		expect(name).toBe(25);
+		expect(name).toBe(true);
 	})
 	
 	it('should populate optional message', () => {
 		
 		class People {
 		
-			@MaxLength(25, 'Too Long')
+			@Required("Required")
 			name: string;	
 		}
 		let  people = new People()
 		
-		let name = Reflect.getMetadata(c.prefix + c.maxLength, people, "name");
-		expect(name).toBe(25);
+		let name = Reflect.getMetadata(metadataKey, people, "name");
+		expect(name).toBe(true)
 		let message = Reflect.getMetadata(metadataKey + c.message, people, "name");
-		expect(message).toBe('Too Long');
+		expect(message).toBe("Required");
 	})
 	
 })

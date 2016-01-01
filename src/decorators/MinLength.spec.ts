@@ -1,36 +1,36 @@
-import Required from './Required';
+import {MinLength} from './MinLength';
 import * as c from '../constants';
 
-describe("@Required()", () => {
+describe("@MinLenth()", () => {
 
-	let metadataKey = c.prefix + c.required;
+	let metadataKey = c.prefix + c.minLength;
 
 	it('should populate the property metadata', () => {
 		
 		class People {
 		
-			@Required()
+			@MinLength(3)
 			name: string;	
 		}
 		let  people = new People()
 		
 		let name = Reflect.getMetadata(metadataKey, people, "name");
-		expect(name).toBe(true);
+		expect(name).toBe(3);
 	})
 	
 	it('should populate optional message', () => {
 		
 		class People {
 		
-			@Required("Required")
+			@MinLength(3, 'Too Short')
 			name: string;	
 		}
 		let  people = new People()
 		
 		let name = Reflect.getMetadata(metadataKey, people, "name");
-		expect(name).toBe(true)
+		expect(name).toBe(3);
 		let message = Reflect.getMetadata(metadataKey + c.message, people, "name");
-		expect(message).toBe("Required");
+		expect(message).toBe('Too Short');
 	})
 	
 })

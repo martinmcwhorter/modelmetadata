@@ -1,12 +1,12 @@
 import * as c from '../constants';
 
-function required(message?: string): any {
+function maxLength(length: number, message?: string): any {
 	
 	return  (target: Object, propertyKey: string | symbol): PropertyDecorator => {
 	
-		let name = c.prefix + c.required;
+		let name = c.prefix + c.maxLength;
 	
-		Reflect.defineMetadata(name, true, target, propertyKey);
+		Reflect.defineMetadata(name, length, target, propertyKey);
 
 		if (message) {
 			Reflect.defineMetadata(name + c.message, message, target, propertyKey);
@@ -16,5 +16,4 @@ function required(message?: string): any {
 	}
 }
 
-let Required = required;
-export default Required;
+export let MaxLength = maxLength;

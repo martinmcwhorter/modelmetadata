@@ -1,13 +1,16 @@
 import {FormBuilder, Validators,Control} from "angular2/common";
+import {Injectable} from 'angular2/core';
 import * as c from '../constants';
 
+
+@Injectable()
 export class Angular2FormBuilder {
 	
 	private Model: any;
 	private rawValidators: Function[];
 	private key: string;
 	
-	constructor(private formBuilder: FormBuilder = new FormBuilder()) {}
+	constructor(private formBuilder: FormBuilder) {}
 	
 	getForm(Model: any) {
 		

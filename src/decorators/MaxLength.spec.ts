@@ -1,36 +1,36 @@
-import Pattern from './Pattern';
+import {MaxLength} from './MaxLength';
 import * as c from '../constants';
 
-describe("@Pattern()", () => {
-
-	let metadataKey = c.prefix + c.pattern;
+describe("@MaxLength()", () => {
+	
+	let metadataKey = c.prefix + c.maxLength;
 
 	it('should populate the property metadata', () => {
 		
 		class People {
 		
-			@Pattern(/^[a-zA-Z].*$/)
+			@MaxLength(25)
 			name: string;	
 		}
 		let  people = new People()
 		
 		let name = Reflect.getMetadata(metadataKey, people, "name");
-		expect(name).toEqual(/^[a-zA-Z].*$/);
+		expect(name).toBe(25);
 	})
 	
 	it('should populate optional message', () => {
 		
 		class People {
 		
-			@Pattern(/^[a-zA-Z].*$/, "Doesn't Match")
+			@MaxLength(25, 'Too Long')
 			name: string;	
 		}
 		let  people = new People()
 		
-		let name = Reflect.getMetadata(metadataKey, people, "name");
-		expect(name).toEqual(/^[a-zA-Z].*$/);
+		let name = Reflect.getMetadata(c.prefix + c.maxLength, people, "name");
+		expect(name).toBe(25);
 		let message = Reflect.getMetadata(metadataKey + c.message, people, "name");
-		expect(message).toBe("Doesn't Match");
+		expect(message).toBe('Too Long');
 	})
 	
 })

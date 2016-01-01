@@ -6,16 +6,25 @@
   <script src="../node_modules/jasmine-core/lib/jasmine-core/jasmine-html.js"></script>
   <script src="../node_modules/jasmine-core/lib/jasmine-core/boot.js"></script>
   <script src="../node_modules/systemjs/dist/system.src.js"></script>
+  <script src="../node_modules/angular2/bundles/angular2-polyfills.js"></script>
+  <script src="../node_modules/angular2/bundles/angular2.dev.js"></script>
+  <script src="../node_modules/rxjs/bundles/Rx.js"></script>
   <script src="../node_modules/reflect-metadata/reflect.js"></script>
+  
   <script>
     System.config({
       "baseURL": "/",
-      "defaultJSExtensions": true
+      "defaultJSExtensions": true,
+	  map: {
+		  angular2: 'node_modules/angular2',
+		  rxjs: 'node_modules/rxjs'
+	  }
     });
-    System.import('dist/js/cjs/docorators/specs.js')
-      
-      .then(window.onload)
-      .catch(console.error.bind(console));
+	Promise.all([
+		System.import('dist/js/cjs/decorators/specs.js'),
+		System.import('dist/js/cjs/adapters/specs.js')
+	]).then(window.onload)
+    	.catch(console.error.bind(console));
   </script>
 </head>
 <body>

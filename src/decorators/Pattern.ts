@@ -16,5 +16,5 @@ function pattern(pattern: RegExp, message?: string): any {
 	}
 }
 
-let Pattern = pattern;
-export default Pattern;
+export let Pattern = pattern;
+
