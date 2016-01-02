@@ -1,9 +1,9 @@
-import {Pattern} from './Pattern';
+import {Pattern} from './decorators';
 import * as c from '../constants';
 
 describe("@Pattern()", () => {
 
-	let metadataKey = c.prefix + c.pattern;
+	let metadataKey = c.pattern;
 
 	it('should populate the property metadata', () => {
 		

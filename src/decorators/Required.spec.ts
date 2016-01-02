@@ -1,9 +1,9 @@
-import {Required} from './Required';
+import {Required} from './decorators';
 import * as c from '../constants';
 
 describe("@Required()", () => {
 
-	let metadataKey = c.prefix + c.required;
+	let metadataKey = c.required;
 
 	it('should populate the property metadata', () => {
 		

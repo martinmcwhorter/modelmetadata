@@ -2,16 +2,25 @@ import * as c from '../constants';
 
 export function decoratorFactory<T>(metadataKey: string, defaultValue?: any) {
 
-	return (value?: T, message?: string): any  => {
+	return (...args: any[]): any  => {
+		
+		let message: string;
+		let value: any;
+		
+		if (defaultValue !== undefined) {
+			value = defaultValue;
+			message = args[0] || undefined;
+		} else {
+			value = args[0];
+			message = args[1] || undefined;
+		}
 	
 		return  (target: Object, propertyKey: string | symbol): PropertyDecorator => {
-		
-			if (defaultValue) value = defaultValue;
 		
 			Reflect.defineMetadata(metadataKey, value, target, propertyKey);
 	
 			if (message) {
-				Reflect.defineMetadata(metadataKey, message, target, propertyKey);
+				Reflect.defineMetadata(metadataKey + c.message, message, target, propertyKey);
 			}
 			
 			let propertyKeys: [string|symbol] = Reflect.getMetadata(c.propertyKeys, target) || [];

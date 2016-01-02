@@ -1,4 +1,4 @@
-import {Label} from './Label';
+import {Label} from './decorators';
 import * as c from '../constants';
 
 describe("@Label()", () => {
@@ -13,7 +13,7 @@ describe("@Label()", () => {
 
 	it('should populate the property metadata', () => {
 		
-		let name = Reflect.getMetadata(c.prefix + c.label, people, 'name');
+		let name = Reflect.getMetadata(c.label, people, 'name');
 		
 		expect(name).toBe("Name");
 	})

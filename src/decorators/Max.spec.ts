@@ -1,4 +1,4 @@
-import Max from './Max';
+import {Max} from './decorators';
 import * as c from '../constants';
 
 describe("@Max()", () => {
@@ -12,7 +12,7 @@ describe("@Max()", () => {
 		}
 		let  people = new People()
 		
-		let name = Reflect.getMetadata(c.prefix + c.max, people, "age");
+		let name = Reflect.getMetadata(c.max, people, "age");
 		expect(name).toBe(99);
 	})
 	
@@ -25,9 +25,9 @@ describe("@Max()", () => {
 		}
 		let  people = new People()
 		
-		let name = Reflect.getMetadata(c.prefix + c.max, people, "age");
+		let name = Reflect.getMetadata(c.max, people, "age");
 		expect(name).toBe(99);
-		let message = Reflect.getMetadata(c.prefix + c.max + c.message, people, "age");
+		let message = Reflect.getMetadata(c.max + c.message, people, "age");
 		expect(message).toBe('Too Old');
 	})
 	
