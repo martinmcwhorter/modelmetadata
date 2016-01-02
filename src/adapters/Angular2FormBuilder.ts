@@ -8,7 +8,7 @@ export class Angular2FormBuilder {
 	
 	private Model: any;
 	private rawValidators: Function[];
-	private key: string;
+	private key: string|symbol;
 	
 	constructor(private formBuilder: FormBuilder) {}
 	
@@ -16,7 +16,7 @@ export class Angular2FormBuilder {
 		
 		this.Model = Model;
 		var modelInstance = new Model();
-		var keys = Object.keys(modelInstance);
+		var keys: (string|symbol)[] = Reflect.getMetadata(c.propertyKeys, modelInstance);
 		var controlsConfig: {[key: string]: any} = {};
 		
 		keys.forEach(key => {

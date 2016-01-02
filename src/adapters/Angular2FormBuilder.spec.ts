@@ -15,7 +15,7 @@ describe('Angular2FormBuilder', () => {
 	
 	describe('getForm()', () => {
 		
-		xit('should generate simple form for simple model', () => {
+		it('should generate simple form for simple model', () => {
 			
 			class Person {
 				@Required()
