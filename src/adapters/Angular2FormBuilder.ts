@@ -1,3 +1,4 @@
+import {isPresent} from 'angular2/src/facade/lang';
 import {FormBuilder, Validators,Control} from "angular2/common";
 import {Injectable} from 'angular2/core';
 import * as c from '../constants';
@@ -27,6 +28,7 @@ export class Angular2FormBuilder {
 			this.pattern();
 			this.maxLength();
 			this.minLength();
+            this.min();
 			
 			var validators = Validators.compose(this.rawValidators);
 			
@@ -66,4 +68,17 @@ export class Angular2FormBuilder {
 		if (minLength) this.rawValidators.push(Validators.maxLength(minLength)); 
 	}
 	
+    private min() {
+        var min: number = Reflect.getMetadata(c.MIN, this.modelInstance, this.key);
+        if (min) this.rawValidators.push(
+            
+            (control: Control): {[key: string]: any} => {
+                if (isPresent(Validators.required(control))) return null;
+                var v: number = control.value;
+                return v < min ?
+                    {"min": {"requiredCount": min, "actualCount": v}} :
+                    null;
+            })
+   
+    }
 }
