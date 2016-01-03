@@ -20,12 +20,12 @@ export function decoratorFactory<T>(metadataKey: string, defaultValue?: any) {
 			Reflect.defineMetadata(metadataKey, value, target, propertyKey);
 	
 			if (message) {
-				Reflect.defineMetadata(metadataKey + c.message, message, target, propertyKey);
+				Reflect.defineMetadata(metadataKey + c.MESSAGE, message, target, propertyKey);
 			}
 			
-			let propertyKeys: [string|symbol] = Reflect.getMetadata(c.propertyKeys, target) || [];
+			let propertyKeys: [string|symbol] = Reflect.getMetadata(c.PROPERTY_KEYS, target) || [];
 			if (propertyKeys.indexOf(propertyKey) === -1)  propertyKeys.push(propertyKey);
-			Reflect.defineMetadata(c.propertyKeys, propertyKeys, target);
+			Reflect.defineMetadata(c.PROPERTY_KEYS, propertyKeys, target);
 			
 			return;
 		}

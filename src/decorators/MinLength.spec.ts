@@ -1,9 +1,9 @@
-import {MinLength} from './MinLength';
+import {MinLength} from './decorators';
 import * as c from '../constants';
 
 describe("@MinLenth()", () => {
 
-	let metadataKey = c.prefix + c.minLength;
+	let metadataKey = c.MIN_LENGTH;
 
 	it('should populate the property metadata', () => {
 		
@@ -29,7 +29,7 @@ describe("@MinLenth()", () => {
 		
 		let name = Reflect.getMetadata(metadataKey, people, "name");
 		expect(name).toBe(3);
-		let message = Reflect.getMetadata(metadataKey + c.message, people, "name");
+		let message = Reflect.getMetadata(metadataKey + c.MESSAGE, people, "name");
 		expect(message).toBe('Too Short');
 	})
 	

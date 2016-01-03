@@ -3,7 +3,7 @@ import * as c from '../constants';
 
 describe("@Required()", () => {
 
-	let metadataKey = c.required;
+	let metadataKey = c.REQUIRED;
 
 	it('should populate the property metadata', () => {
 		
@@ -29,7 +29,7 @@ describe("@Required()", () => {
 		
 		let name = Reflect.getMetadata(metadataKey, people, "name");
 		expect(name).toBe(true)
-		let message = Reflect.getMetadata(metadataKey + c.message, people, "name");
+		let message = Reflect.getMetadata(metadataKey + c.MESSAGE, people, "name");
 		expect(message).toBe("Required");
 	})
 	
