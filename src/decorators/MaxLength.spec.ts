@@ -1,9 +1,9 @@
-import {MaxLength} from './MaxLength';
+import {MaxLength} from './decorators';
 import * as c from '../constants';
 
 describe("@MaxLength()", () => {
 	
-	let metadataKey = c.prefix + c.maxLength;
+	let metadataKey = c.maxLength;
 
 	it('should populate the property metadata', () => {
 		
@@ -27,7 +27,7 @@ describe("@MaxLength()", () => {
 		}
 		let  people = new People()
 		
-		let name = Reflect.getMetadata(c.prefix + c.maxLength, people, "name");
+		let name = Reflect.getMetadata(metadataKey, people, "name");
 		expect(name).toBe(25);
 		let message = Reflect.getMetadata(metadataKey + c.message, people, "name");
 		expect(message).toBe('Too Long');
