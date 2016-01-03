@@ -1,9 +1,9 @@
-import {Min} from './Min';
+import {Min} from './decorators';
 import * as c from '../constants';
 
 describe("@Min()", () => {
 
-	let metadataKey = c.prefix + c.min;
+	let metadataKey = c.MIN;
 
 	it('should populate the property metadata', () => {
 		
@@ -29,7 +29,7 @@ describe("@Min()", () => {
 		
 		let name = Reflect.getMetadata(metadataKey, people, "age");
 		expect(name).toBe(17);
-		let message = Reflect.getMetadata(metadataKey + c.message, people, "age");
+		let message = Reflect.getMetadata(metadataKey + c.MESSAGE, people, "age");
 		expect(message).toBe('Too Young');
 	})
 	

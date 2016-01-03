@@ -3,7 +3,7 @@ import * as c from '../constants';
 
 describe("@Pattern()", () => {
 
-	let metadataKey = c.pattern;
+	let metadataKey = c.PATTERN;
 
 	it('should populate the property metadata', () => {
 		
@@ -29,7 +29,7 @@ describe("@Pattern()", () => {
 		
 		let name = Reflect.getMetadata(metadataKey, people, "name");
 		expect(name).toEqual(/^[a-zA-Z].*$/);
-		let message = Reflect.getMetadata(metadataKey + c.message, people, "name");
+		let message = Reflect.getMetadata(metadataKey + c.MESSAGE, people, "name");
 		expect(message).toBe("Doesn't Match");
 	})
 	

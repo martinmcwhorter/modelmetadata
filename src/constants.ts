@@ -1,13 +1,13 @@
-export let prefix = "modelProperty:";
+export const PREFIX = "modelProperty:";
 
-export let required = prefix + "required";
-export let pattern = prefix + "pattern";
-export let maxLength = prefix + "maxLength";
-export let minLength = prefix + "minLength";
-export let max = prefix + "max";
-export let min = prefix + "min";
-export let label = prefix + "label";
+export const REQUIRED = PREFIX + "required";
+export const PATTERN = PREFIX + "pattern";
+export const MAX_LENGTH = PREFIX + "maxLength";
+export const MIN_LENGTH = PREFIX + "minLength";
+export const MAX = PREFIX + "max";
+export const MIN = PREFIX + "min";
+export const LABEL = PREFIX + "label";
 
-export let propertyKeys = prefix + "propertyKeys";
+export const PROPERTY_KEYS = PREFIX + "propertyKeys";
 
-export let message = ":message";
+export const MESSAGE = ":message";

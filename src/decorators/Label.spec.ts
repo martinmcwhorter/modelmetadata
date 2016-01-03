@@ -13,7 +13,7 @@ describe("@Label()", () => {
 
 	it('should populate the property metadata', () => {
 		
-		let name = Reflect.getMetadata(c.label, people, 'name');
+		let name = Reflect.getMetadata(c.LABEL, people, 'name');
 		
 		expect(name).toBe("Name");
 	})

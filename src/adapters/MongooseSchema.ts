@@ -36,31 +36,31 @@ export class MongooseSchema {
 	}
 	
 	private required() {
-		var required = Reflect.getMetadata(c.prefix + c.required, this.Model, this.key);
+		var required = Reflect.getMetadata(c.PREFIX + c.REQUIRED, this.Model, this.key);
 		if (required) this.schemaRecord['min'] = 1;
 	}
 	
 	private pattern() {
-		var pattern: RegExp = Reflect.getMetadata(c.prefix + c.pattern, this.Model, this.key);
+		var pattern: RegExp = Reflect.getMetadata(c.PREFIX + c.PATTERN, this.Model, this.key);
 		if (pattern) this.schemaRecord['validate'] = { validator: (value: any) => pattern.test(value) }
 		
-		var message: string = Reflect.getMetadata(c.prefix + c.pattern + c.message, this.Model, this.key);
+		var message: string = Reflect.getMetadata(c.PREFIX + c.PATTERN + c.MESSAGE, this.Model, this.key);
 		if (message) this.schemaRecord['validate']['message'] = message; 
 	}
 	
 	private maxLength() {
-		var maxLength: number = Reflect.getMetadata(c.prefix + c.maxLength, this.Model, this.key);
+		var maxLength: number = Reflect.getMetadata(c.PREFIX + c.MAX_LENGTH, this.Model, this.key);
 		if (maxLength) this.schemaRecord['maxlength'] = maxLength; 
 		
-		var message: string = Reflect.getMetadata(c.prefix + c.maxLength + c.message, this.Model, this.key);
+		var message: string = Reflect.getMetadata(c.PREFIX + c.MAX_LENGTH + c.MESSAGE, this.Model, this.key);
 		if (message) this.schemaRecord['validate']['message'] = message; 
 	}
 		
 	private minLength() {
-		var minLength: number = Reflect.getMetadata(c.prefix + c.minLength, this.Model, this.key);
+		var minLength: number = Reflect.getMetadata(c.PREFIX + c.MIN_LENGTH, this.Model, this.key);
 		if (minLength) this.schemaRecord['minlength'] = minLength;
 		
-		var message: string = Reflect.getMetadata(c.prefix + c.minLength + c.message, this.Model, this.key);
+		var message: string = Reflect.getMetadata(c.PREFIX + c.MIN_LENGTH + c.MESSAGE, this.Model, this.key);
 		if (message) this.schemaRecord['validate']['message'] = message; 
 	}
 	

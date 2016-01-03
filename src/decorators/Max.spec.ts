@@ -12,7 +12,7 @@ describe("@Max()", () => {
 		}
 		let  people = new People()
 		
-		let name = Reflect.getMetadata(c.max, people, "age");
+		let name = Reflect.getMetadata(c.MAX, people, "age");
 		expect(name).toBe(99);
 	})
 	
@@ -25,9 +25,9 @@ describe("@Max()", () => {
 		}
 		let  people = new People()
 		
-		let name = Reflect.getMetadata(c.max, people, "age");
+		let name = Reflect.getMetadata(c.MAX, people, "age");
 		expect(name).toBe(99);
-		let message = Reflect.getMetadata(c.max + c.message, people, "age");
+		let message = Reflect.getMetadata(c.MAX + c.MESSAGE, people, "age");
 		expect(message).toBe('Too Old');
 	})
 	

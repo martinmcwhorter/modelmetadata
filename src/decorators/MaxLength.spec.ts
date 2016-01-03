@@ -3,7 +3,7 @@ import * as c from '../constants';
 
 describe("@MaxLength()", () => {
 	
-	let metadataKey = c.maxLength;
+	let metadataKey = c.MAX_LENGTH;
 
 	it('should populate the property metadata', () => {
 		
@@ -29,7 +29,7 @@ describe("@MaxLength()", () => {
 		
 		let name = Reflect.getMetadata(metadataKey, people, "name");
 		expect(name).toBe(25);
-		let message = Reflect.getMetadata(metadataKey + c.message, people, "name");
+		let message = Reflect.getMetadata(metadataKey + c.MESSAGE, people, "name");
 		expect(message).toBe('Too Long');
 	})
 	

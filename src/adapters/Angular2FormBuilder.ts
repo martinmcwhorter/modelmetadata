@@ -15,7 +15,7 @@ export class Angular2FormBuilder {
 	getForm(instance: any) {
 		
         this.modelInstance = instance;
-		var keys: (string|symbol)[] = Reflect.getMetadata(c.propertyKeys, this.modelInstance);
+		var keys: (string|symbol)[] = Reflect.getMetadata(c.PROPERTY_KEYS, this.modelInstance);
 		var controlsConfig: {[key: string]: any} = {};
 		
 		keys.forEach(key => {
@@ -39,12 +39,12 @@ export class Angular2FormBuilder {
 	}
 	
 	private required() {
-		var required = Reflect.getMetadata(c.required, this.modelInstance, this.key);
+		var required = Reflect.getMetadata(c.REQUIRED, this.modelInstance, this.key);
 		if (required) this.rawValidators.push(Validators.required);
 	}
 	
 	private pattern() {
-		var pattern: RegExp = Reflect.getMetadata(c.pattern, this.modelInstance, this.key);
+		var pattern: RegExp = Reflect.getMetadata(c.PATTERN, this.modelInstance, this.key);
 		if (pattern) this.rawValidators.push(
 			
 			(control: Control) => {
@@ -57,12 +57,12 @@ export class Angular2FormBuilder {
 	}
 	
 	private maxLength() {
-		var maxLength: number = Reflect.getMetadata(c.maxLength, this.modelInstance, this.key);
+		var maxLength: number = Reflect.getMetadata(c.MAX_LENGTH, this.modelInstance, this.key);
 		if (maxLength) this.rawValidators.push(Validators.maxLength(maxLength)); 
 	}
 		
 	private minLength() {
-		var minLength: number = Reflect.getMetadata(c.minLength, this.modelInstance, this.key);
+		var minLength: number = Reflect.getMetadata(c.MIN_LENGTH, this.modelInstance, this.key);
 		if (minLength) this.rawValidators.push(Validators.maxLength(minLength)); 
 	}
 	
