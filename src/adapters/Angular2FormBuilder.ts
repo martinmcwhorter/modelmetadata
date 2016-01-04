@@ -1,8 +1,8 @@
 import {isPresent} from 'angular2/src/facade/lang';
-import {FormBuilder, Validators,Control} from "angular2/common";
+import {FormBuilder, Control} from 'angular2/common';
 import {Injectable} from 'angular2/core';
 import * as c from '../constants';
-
+import {Validators, validatorConfig} from './angular2/';
 
 @Injectable()
 export class Angular2FormBuilder {
@@ -11,7 +11,9 @@ export class Angular2FormBuilder {
 	private rawValidators: Function[];
 	private key: string|symbol;
 	
-	constructor(private formBuilder: FormBuilder) {}
+	constructor(
+        private formBuilder: FormBuilder, 
+        private validatorCollection: validatorConfig) {}
 	
 	getForm(instance: any) {
 		
@@ -23,12 +25,8 @@ export class Angular2FormBuilder {
 			
 			this.key = key;
 			this.rawValidators = [];
-			
-			this.required();
-			this.pattern();
-			this.maxLength();
-			this.minLength();
-            this.min();
+            
+            this.iterateOverValidators();
 			
 			var validators = Validators.compose(this.rawValidators);
 			
@@ -36,49 +34,16 @@ export class Angular2FormBuilder {
 		})
 		
 		return this.formBuilder.group(controlsConfig);
-		
-		
 	}
-	
-	private required() {
-		var required = Reflect.getMetadata(c.REQUIRED, this.modelInstance, this.key);
-		if (required) this.rawValidators.push(Validators.required);
-	}
-	
-	private pattern() {
-		var pattern: RegExp = Reflect.getMetadata(c.PATTERN, this.modelInstance, this.key);
-		if (pattern) this.rawValidators.push(
-			
-			(control: Control) => {
-				
-				if (!pattern.test(control.value)) {
-					control.valid = false;
-				}
-			
-			}); 
-	}
-	
-	private maxLength() {
-		var maxLength: number = Reflect.getMetadata(c.MAX_LENGTH, this.modelInstance, this.key);
-		if (maxLength) this.rawValidators.push(Validators.maxLength(maxLength)); 
-	}
-		
-	private minLength() {
-		var minLength: number = Reflect.getMetadata(c.MIN_LENGTH, this.modelInstance, this.key);
-		if (minLength) this.rawValidators.push(Validators.maxLength(minLength)); 
-	}
-	
-    private min() {
-        var min: number = Reflect.getMetadata(c.MIN, this.modelInstance, this.key);
-        if (min) this.rawValidators.push(
-            
-            (control: Control): {[key: string]: any} => {
-                if (isPresent(Validators.required(control))) return null;
-                var v: number = control.value;
-                return v < min ?
-                    {"min": {"requiredCount": min, "actualCount": v}} :
-                    null;
-            })
-   
+    
+    private iterateOverValidators() {
+        
+        this.validatorCollection
+            .forEach(v => this.applyValidators(v.key, v.validator))
+    }
+    
+    private applyValidators(metadataKey: string, validator: (value: any) => Function) {
+        var value = Reflect.getMetadata(metadataKey, this.modelInstance, this.key);
+        if (value !== undefined) this.rawValidators.push(validator(value));
     }
 }

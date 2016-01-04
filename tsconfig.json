@@ -4,9 +4,10 @@
 		"noImplicitAny": true,
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
-		"target": "ES5",
+		"target": "es5",
 		"outDir": "dist/js/cjs",
-		"sourceMap": true
+		"sourceMap": true,
+        "declaration": true
 	},
 	"exclude": [
 		"node_modules",
