@@ -56,26 +56,26 @@ export class JSONSchema {
         var integer = Reflect.getMetadata(c.INTEGER, this.modelInstance, this.key);
         switch (type) {
             case String:
-            stringType = 'string';
-            break;
+                stringType = 'string';
+                break;
             case Number:
-            stringType = 'number';
-            break;
+                stringType = 'number';
+                break;
             case Boolean:
-            stringType = 'boolean';
-            break;
+                stringType = 'boolean';
+                break;
             case Date:
             stringType = 'string';
-            this.schemaRecord['format'] = "date-time";
-            break;
+                this.schemaRecord['format'] = "date-time";
+                break;
             case Object:
-            stringType = 'object';
-            break;
+                stringType = 'object';
+                break;
             case Array:
-            stringType = 'array';
-            break;
+                stringType = 'array';
+                break;
             default:
-            break;
+                break;
         }
         
         this.schemaRecord['type'] = stringType;
