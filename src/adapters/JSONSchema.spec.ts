@@ -18,25 +18,25 @@ describe('JSONSchema', () => {
           @Required()
           @Description("The unique identifier for a product")
           @Integer()
-          id: number = null;
+          id: number;
           
           @Required()
           @Description("Name of the product")
           @MaxLength(100)
-          name: string = null;
+          name: string;
           
           @Required()
           @Min(0)
-          price: number = null;
+          price: number;
           
-          tags: Array<string> = null;
-          
+          tags: Array<string>;
+                   
           @Label("State")
           @Default("Edited")
-          state: string = null;
+          state: string;
           
           @Enum(['red','green','blue','yellow'])
-          color: string = null;
+          color: string;
           
           constructor() {}
       }
@@ -78,11 +78,7 @@ describe('JSONSchema', () => {
           "required": ["id", "name", "price"]
       }
     
-
-
-        schema = target.getSchema(Product); 
-
-
+        schema = target.getSchema(new Product()); 
     });
         
  	describe('getSchema()', () => {

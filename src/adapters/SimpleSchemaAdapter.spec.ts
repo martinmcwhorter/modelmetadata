@@ -17,45 +17,41 @@ describe('SimpleSchema', () => {
           @Required()
           @MaxLength(200)
           @Label("Title")
-          title: string = null;
+          title: string;
           
           @Required()
           @Label("Author")
-          author: string = null;
+          author: string;
           
           @Required()
           @Integer()
           @Min(0)
           @Label("Number of copies")
-          copies: number = null;
+          copies: number;
           
           @Label("Last date this book was checked out")
-          lastCheckedOut: Date = null;
+          lastCheckedOut: Date;
           
           @MaxLength(1000)
           @Label("Brief summary")
-          summary: string = null;
+          summary: string;
           
           @Required()
           @Label("Price")
-          price: number = null;
+          price: number;
           
           @Label("State")
           @Default("Edited")
-          state: string = null;
+          state: string;
           
           @Label("Cover color")
           @Enum(['red','green','blue','yellow'])
-          color: string = null;
+          color: string;
           
           @Required()
-          chapters: Array<any> = null;
-          
-          constructor() {}
+          chapters: Array<any>;
       }
   
-      //let book: Book ;
-      //let schema: any;
       
       //from: https://github.com/aldeed/meteor-simple-schema
       bookSchema  = {
@@ -106,11 +102,7 @@ describe('SimpleSchema', () => {
         }
       }
     
-
-        //let book = new Book();
-        schema = target.getSchema(Book);   
-        //console.log('schema:',schema, bookSchema);
-
+        schema = target.getSchema(new Book());   
 
     });
         

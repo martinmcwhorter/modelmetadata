@@ -2,21 +2,17 @@ import * as c from '../constants';
 
 export class SimpleSchema {
 	
-    private Model: any;
-    private key: string;
+    private key: string|symbol;
     private schema: {[key: string]: {[name: string]: any}};
 	
-    schemaRecord: any;
-    modelInstance: any;
+    private schemaRecord: any;
+    private modelInstance: any;
   
-    constructor() {}
-  
-	getSchema(Model: any) :any {
+	getSchema(modelInstance: any) :any {
 		
-        this.Model = Model;
-        this.modelInstance = new Model();
+        this.modelInstance = modelInstance;
         
-        var keys = Object.keys(this.modelInstance);
+        var keys: (string|symbol)[] = Reflect.getMetadata(c.PROPERTY_KEYS, this.modelInstance);
         this.schema = {};
         
         keys.forEach(key => {

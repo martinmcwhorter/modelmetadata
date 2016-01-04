@@ -2,22 +2,18 @@ import * as c from '../constants';
 
 export class JSONSchema {
 
-    private Model: any;
-    private key: string;
+    private modelInstance: any;
+    private key: string|symbol;
     private schema: { title: string, $schema: string, required: string[], properties: any, type: string }
 
-    schemaRecord: any;
-    modelInstance: any;
-    requiredFields: string[] = [];
+    private schemaRecord: any;
+    private requiredFields: (string|symbol)[] = [];
 
-    constructor() { }
+    getSchema(modelInstance: any): any {
 
-    getSchema(Model: any): any {
+        this.modelInstance = modelInstance;
 
-        this.Model = Model;
-        this.modelInstance = new Model();
-
-        var keys = Object.keys(this.modelInstance);
+        var keys: (string|symbol)[] = Reflect.getMetadata(c.PROPERTY_KEYS, this.modelInstance);
         this.schema = {
             title: "",
             $schema: "http://json-schema.org/draft-04/schema#",
@@ -45,7 +41,7 @@ export class JSONSchema {
             this.schema.properties[key] = this.schemaRecord;
         })
 
-        this.schema.required = this.requiredFields;
+        this.schema.required = <string[]>this.requiredFields;
         return this.schema;
     }
 
