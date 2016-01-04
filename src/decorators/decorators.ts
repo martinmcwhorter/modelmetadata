@@ -15,4 +15,14 @@ export let Min: (length: number, message?: string) => any = decoratorFactory<num
 
 export let MinLength: (length: number, message?: string) => any = decoratorFactory<number>(c.MIN_LENGTH);
 
+export let Integer: ( message?: string) => any = decoratorFactory<void>(c.INTEGER, true);
+
+export let Default: ( value: any, message?: string) => any = decoratorFactory<void>(c.DEFAULT);
+
+export let Enum: ( values: any[], message?: string) => any = decoratorFactory<void>(c.ENUM);
+
+export let Description: ( description: string, message?: string) => any = decoratorFactory<void>(c.DESCRIPTION);
+
+export let Format: ( format: string, message?: string) => any = decoratorFactory<void>(c.FORMAT);
+
 

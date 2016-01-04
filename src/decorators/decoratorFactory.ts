@@ -27,6 +27,24 @@ export function decoratorFactory<T>(metadataKey: string, defaultValue?: any) {
 			if (propertyKeys.indexOf(propertyKey) === -1)  propertyKeys.push(propertyKey);
 			Reflect.defineMetadata(c.PROPERTY_KEYS, propertyKeys, target);
 			
+      /*if (metadataKey === 'modelProperty:min' && propertyKey === 'copiesx') {
+        console.log(metadataKey, value, propertyKey);
+        //console.log(Reflect.getMetadataKeys(target));
+        console.log(Reflect.getMetadataKeys(target, propertyKey));
+        console.log(Reflect.getOwnMetadataKeys(target, propertyKey));
+        console.log(Reflect.getMetadata(metadataKey,target, propertyKey));
+        console.log(target);
+        
+        var Book = target.constructor;
+        var t = new Book();
+        console.log('a', Book, 'b', target, t, 'c');
+        
+        console.log('xxxx',Reflect.getOwnMetadataKeys(t, propertyKey), 'zzzz');
+        console.log('xxxx',Reflect.getMetadataKeys(t, propertyKey), 'zzzz');
+        
+      }*/
+      
+      
 			return;
 		}
 	}
