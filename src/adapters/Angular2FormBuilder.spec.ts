@@ -1,6 +1,6 @@
 import {Angular2FormBuilder} from './Angular2FormBuilder';
 import {FormBuilder, ControlGroup, Control} from 'angular2/common';
-import {Required, MaxLength, Min, Max, Pattern} from '../decorators/index';
+import {Required, MaxLength, Min, Max, Pattern} from '../decorators';
 import {validatorConfig} from './angular2';
 
 describe('Angular2FormBuilder', () => {

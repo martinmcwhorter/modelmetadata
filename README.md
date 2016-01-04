@@ -1,10 +1,15 @@
 # Model Metadata
-Define model metadata using TypeScript Decorators
+Define model metadata using ES7 / TypeScript Decorators
 
 The aim of this project is to provide model metadata decorators to 
-mark up plain old JavaScript classes with as well as adapters to
-turn that metadata into something usesful like an Angular2 `FormBuilder`
-object or a `mongoose` schema. The posibilities are endless.
+mark up plain old ECMAScript classes with, as well as adapters to
+turn that metadata into something usesful. The posibilities are endless.
+
+The project currecnly has adapters for:
+* Angular2 FormBuilder
+* JSONSchema
+* SimpleScheme (Meteor)
+* Mongoose
 
 ```ts
 class Person {
@@ -18,13 +23,13 @@ class Person {
 ```
 
 ```ts
-var schema = mongooseSchemaAdapter.getSchema(Person);
+var schema = mongooseSchemaAdapter.getSchema(new Person());
 // schema = new Schema({
 //		firstName: {type: String, min: 1},
 //		lastName: {type: String, min: 1} 
 //	});
 	
-var form = angular2FormBuilderAdapter.getForm(Person);
+var form = angular2FormBuilderAdapter.getForm(new Person());
 // form = formBuilder.group({
 //		firstName: ["", Validators.Required],
 //		lastName: ["", Validators.Required]		

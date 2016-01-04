@@ -1,67 +1,71 @@
 import * as c from '../constants';
 
+let schemaConfig: [{key: string; field: string}] = [
+    {key: c.MAX, field: "max"},
+    {key: c.MAX_LENGTH, field: "maxlength"},
+    {key: c.MIN, field: "min"},
+    {key: c.MIN_LENGTH, field: "minlength"},
+]
+
 export class MongooseSchema {
 	
-	private Model: any;
-	private key: string;
+	private modelInstance: any;
+	private key: string|symbol;
 	private schema: {[key: string]: {[name: string]: any}};
 	
 	private get schemaRecord() {
 		return this.schema[this.key];
 	}
 	
-	getSchema(Model: any) {
+	getSchema(modelInsance: any) {
 		
-		this.Model = Model;
-		var modelInstance = new Model();
-		var keys = Object.keys(modelInstance);
+		this.modelInstance = modelInsance;
+		var keys: (string|symbol)[] = Reflect.getMetadata(c.PROPERTY_KEYS, this.modelInstance);
 		this.schema = {};
 		
 		keys.forEach(key => {
 			
 			this.key = key;
+            this.schema[key] = {};
 			
+            this.type()
 			this.required();
 			this.pattern();
-			this.maxLength();
-			this.minLength();
+            this.iterateOverSchemaConfig();
 		})
 		
 		return this.schema;
 	}
 	
 	private type() {
-		var type = Reflect.getMetadata("design:type", this.Model, this.key);
+		var type = Reflect.getMetadata("design:type", this.modelInstance, this.key);
 		this.schemaRecord['type'] = type;
 	}
 	
 	private required() {
-		var required = Reflect.getMetadata(c.PREFIX + c.REQUIRED, this.Model, this.key);
-		if (required) this.schemaRecord['min'] = 1;
+		var required = Reflect.getMetadata(c.REQUIRED, this.modelInstance, this.key);
+		if (required !== undefined) this.schemaRecord['min'] = 1;
 	}
 	
-	private pattern() {
-		var pattern: RegExp = Reflect.getMetadata(c.PREFIX + c.PATTERN, this.Model, this.key);
-		if (pattern) this.schemaRecord['validate'] = { validator: (value: any) => pattern.test(value) }
+    private pattern() {
+		var pattern: RegExp = Reflect.getMetadata(c.PATTERN, this.modelInstance, this.key);
+		if (pattern !== undefined) this.schemaRecord['validate'] = { validator: (value: any) => pattern.test(value) }
 		
-		var message: string = Reflect.getMetadata(c.PREFIX + c.PATTERN + c.MESSAGE, this.Model, this.key);
-		if (message) this.schemaRecord['validate']['message'] = message; 
+		var message: string = Reflect.getMetadata(c.PATTERN + c.MESSAGE, this.modelInstance, this.key);
+		if (message !== undefined) this.schemaRecord['validate']['message'] = message; 
 	}
-	
-	private maxLength() {
-		var maxLength: number = Reflect.getMetadata(c.PREFIX + c.MAX_LENGTH, this.Model, this.key);
-		if (maxLength) this.schemaRecord['maxlength'] = maxLength; 
+    
+    private iterateOverSchemaConfig() {
+        schemaConfig
+            .forEach(config => this.applySchema(config.key, config.field))
+    }
+    
+    private applySchema(metadataKey: string, field: string) {
+		var value: RegExp = Reflect.getMetadata(metadataKey, this.modelInstance, this.key);
+		if (value !== undefined) this.schemaRecord[field] = value;
 		
-		var message: string = Reflect.getMetadata(c.PREFIX + c.MAX_LENGTH + c.MESSAGE, this.Model, this.key);
-		if (message) this.schemaRecord['validate']['message'] = message; 
-	}
-		
-	private minLength() {
-		var minLength: number = Reflect.getMetadata(c.PREFIX + c.MIN_LENGTH, this.Model, this.key);
-		if (minLength) this.schemaRecord['minlength'] = minLength;
-		
-		var message: string = Reflect.getMetadata(c.PREFIX + c.MIN_LENGTH + c.MESSAGE, this.Model, this.key);
-		if (message) this.schemaRecord['validate']['message'] = message; 
-	}
-	
+		var message: string = Reflect.getMetadata(metadataKey + c.MESSAGE, this.modelInstance, this.key);
+		if (message !== undefined) this.schemaRecord[field]['message'] = message;
+    }
+   
 }

@@ -22,9 +22,7 @@
     });
 	Promise.all([
 		System.import('dist/js/cjs/decorators/specs.js'),
-		System.import('dist/js/cjs/adapters/specs.js'),
-		System.import('dist/js/cjs/adapters/SimpleSchemaAdapter.spec.js'),
-		System.import('dist/js/cjs/adapters/JSONSchema.spec.js')
+		System.import('dist/js/cjs/adapters/specs.js')
 	]).then(window.onload)
     	.catch(console.error.bind(console));
   </script>

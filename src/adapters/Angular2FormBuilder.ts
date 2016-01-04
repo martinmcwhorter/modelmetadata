@@ -1,5 +1,5 @@
 import {isPresent} from 'angular2/src/facade/lang';
-import {FormBuilder, Control} from 'angular2/common';
+import {FormBuilder, Control, ControlGroup} from 'angular2/common';
 import {Injectable} from 'angular2/core';
 import * as c from '../constants';
 import {Validators, validatorConfig} from './angular2/';
@@ -15,7 +15,7 @@ export class Angular2FormBuilder {
         private formBuilder: FormBuilder, 
         private validatorCollection: validatorConfig) {}
 	
-	getForm(instance: any) {
+	getForm(instance: any): ControlGroup {
 		
         this.modelInstance = instance;
 		var keys: (string|symbol)[] = Reflect.getMetadata(c.PROPERTY_KEYS, this.modelInstance);
