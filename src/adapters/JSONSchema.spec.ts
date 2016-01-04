@@ -4,16 +4,16 @@ import {Required, MaxLength, Min, Max, Pattern, Label, Integer, Default, Enum, D
 
 describe('JSONSchema', () => {
 	
-	var target: JSONSchema;
-  var productSchema: any;
-  var schema: any;
+    var target: JSONSchema;
+    var productSchema: any;
+    var schema: any;
 	
-	beforeEach(() => {
+    beforeEach(() => {
 		
-		target = new JSONSchema();
+    target = new JSONSchema();
 
           
-      class Product  {
+    class Product  {
         
           @Required()
           @Description("The unique identifier for a product")
@@ -110,8 +110,5 @@ describe('JSONSchema', () => {
 		    })
         
 	})
-	
-	
-})
 
-
+}) 
