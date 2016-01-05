@@ -1,17 +1,17 @@
 {
-	"compilerOptions": {
-		"module": "commonjs",
-		"noImplicitAny": true,
-		"emitDecoratorMetadata": true,
-		"experimentalDecorators": true,
-		"target": "es5",
-		"outDir": "dist/js/cjs",
-		"sourceMap": true,
+    "compilerOptions": {
+        "module": "commonjs",
+        "noImplicitAny": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "target": "es5",
+        "outDir": "dist/js/cjs",
+        "sourceMap": true,
         "declaration": true
-	},
-	"exclude": [
-		"node_modules",
-		"typings",
-		"dist"	
-	]
+    },
+    "exclude": [
+        "node_modules",
+        "typings",
+        "dist"	
+    ]
 }
