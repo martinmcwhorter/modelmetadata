@@ -30,6 +30,7 @@
     "gulp": "^3.9.0",
     "gulp-typescript": "^2.10.0",
     "jasmine-core": "2.4.1",
+    "mongoose": "^4.3.4",
     "typescript": "^1.7.5"
   }
 }

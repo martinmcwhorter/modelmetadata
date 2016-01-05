@@ -1,5 +1,8 @@
 import {MongooseSchema} from './MongooseSchema';
-import {Required, MaxLength, MinLength, Min, Max, Pattern} from '../decorators'
+import {
+    Required, MaxLength, MinLength, Min, Max, Pattern
+} from '../decorators';
+import {model, Schema, Document} from 'mongoose';
 
 describe('MongooseSchema', () => {
     
@@ -24,10 +27,15 @@ describe('MongooseSchema', () => {
             phone: string;
         }
         
-        let person = new Person();
-        var target = new MongooseSchema().getSchema(person);
+        interface IPerson extends Person, Document { }
         
-        //it('should ')
+        let person = new Person();
+        let schema = new MongooseSchema().getSchema(person);
+        let modelSchema = new Schema(schema);
+        let PersonModel = model<IPerson>('Person', modelSchema);
+        let personModel = new PersonModel(person);
+        
+        let json = personModel.toJSON();
         
     })
     
