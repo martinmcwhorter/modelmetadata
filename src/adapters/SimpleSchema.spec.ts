@@ -1,4 +1,4 @@
-import {SimpleSchema} from './SimpleSchemaAdapter';
+import {SimpleSchema} from './SimpleSchema';
 import {Required, MaxLength, Min, Max, Pattern, Label, Integer, Default, Enum, Description, Format} from '../decorators';
 
 describe('SimpleSchema', () => {
